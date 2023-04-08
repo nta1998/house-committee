@@ -202,8 +202,4 @@ CRONJOBS = [
     ('*/1 * * * *', 'base.cron.UpdateMonthlyPaymentCronJob'),
     ("*/1 * * * *", "base.cron.update_monthly_payment"),
 ]
-SECURE_SSL_REDIREC = True
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = True
-SECURE_BROWSER_XSS_FILTER = True
-os.environ['HTTPS']= "on"
+
