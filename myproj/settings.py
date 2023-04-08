@@ -202,3 +202,4 @@ CRONJOBS = [
     ('*/1 * * * *', 'base.cron.UpdateMonthlyPaymentCronJob'),
     ("*/1 * * * *", "base.cron.update_monthly_payment"),
 ]
+SECURE_SSL_REDIREC = True

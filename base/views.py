@@ -144,7 +144,6 @@ class crudView(APIView):
         """
         Handle GET requests to return a list of MyModel objects
         """
-
         user = request.user
         my_model = user.profile_set.all()
         # my_model = Profile.objects.all()
