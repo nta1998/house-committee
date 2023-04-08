@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 # """
 from datetime import timedelta
 from pathlib import Path
-
+import os
 # # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -206,3 +206,4 @@ SECURE_SSL_REDIREC = True
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = True
 SECURE_BROWSER_XSS_FILTER = True
+os.environ['HTTPS']=True
