@@ -78,6 +78,7 @@ class allprofileView(APIView):
                 "committee_name": Profile.objects.get(id=profile["id"]).building_id.committee_name,
                 "committee_apartment": Profile.objects.get(id=profile["id"]).building_id.committee_apartment,
                 "committee_phone": Profile.objects.get(id=profile["id"]).building_id.committee_phone,
+                "payment_date": Profile.objects.get(id=profile["id"]).building_id.payment_date,
                 "committee_monthly": Profile.objects.get(id=profile["id"]).building_id.committee_monthly}
             profile["user"] = Profile.objects.get(
                 id=profile["id"]).user.email
@@ -157,7 +158,7 @@ class crudView(APIView):
                 "committee_name": Profile.objects.get(id=profile["id"]).building_id.committee_name,
                 "committee_apartment": Profile.objects.get(id=profile["id"]).building_id.committee_apartment,
                 "committee_phone": Profile.objects.get(id=profile["id"]).building_id.committee_phone,
-                "committee_phone": Profile.objects.get(id=profile["id"]).building_id.payment_date,
+                "payment_date": Profile.objects.get(id=profile["id"]).building_id.payment_date,
                 "committee_monthly": Profile.objects.get(id=profile["id"]).building_id.committee_monthly}
             profile["user"] = Profile.objects.get(
                 id=profile["id"]).user.email
