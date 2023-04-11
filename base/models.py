@@ -8,7 +8,7 @@ class Building(models.Model):
     full_address = models.CharField(max_length=100)
     floors = models.IntegerField()
     vote_active = models.BooleanField(default=False)
-    payment_date = models.DateField(default="2010-10-10")
+    payment_date = models.DateField()
     committee_name = models.CharField(max_length=30)
     committee_apartment = models.IntegerField()
     committee_phone = models.CharField(max_length=11)
