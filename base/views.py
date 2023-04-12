@@ -10,9 +10,13 @@ from rest_framework.decorators import permission_classes, api_view
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.models import User
 ##############################################################################
+
+@api_view(['GET'])
+def test(res):
+    return Response( status=status.HTTP_200_OK)
 # ---register--
 
-    
+
 @api_view(['POST'])
 def registerBuilding(request):
     user = User.objects.create_user(
@@ -24,17 +28,21 @@ def registerBuilding(request):
     user.is_staff = True
     user.save()
 
-    serializer = BuildingSerializer(data=request.data["building"], context={'user': request.user})
-    if serializer.is_valid(): 
+    serializer = BuildingSerializer(
+        data=request.data["building"], context={'user': request.user})
+    if serializer.is_valid():
         serializer.save()
-        request.data["profile"]["building_id"] = Building.objects.get(full_address = request.data["building"]["full_address"]).id
-        request.data["profile"]["is_committee"] = True 
-        serializer = ProfileSerializer(data=request.data["profile"], context={'user': user})
+        request.data["profile"]["building_id"] = Building.objects.get(
+            full_address=request.data["building"]["full_address"]).id
+        request.data["profile"]["is_committee"] = True
+        serializer = ProfileSerializer(
+            data=request.data["profile"], context={'user': user})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 def register(request):
@@ -282,7 +290,7 @@ class cruPoolView(APIView):
         my_model = Pool.objects.get(id=id)
         serializer = PoolSerializer(my_model).data
         for user in list(serializer["answered"]):
-            if int(user) == request.data["answered"][-1]:  
+            if int(user) == request.data["answered"][-1]:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         newAnswered = serializer["answered"]
         newAnswered.append(request.data["answered"][-1])
@@ -392,7 +400,7 @@ class crudVoteView(APIView):
         my_model = Vote.objects.get(id=id)
         serializer = VoteSerializer(my_model).data
         for user in list(serializer["answered"]):
-            if int(user) == request.data["answered"][-1]:  
+            if int(user) == request.data["answered"][-1]:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         newAnswered = serializer["answered"]
         newAnswered.append(request.data["answered"][-1])
