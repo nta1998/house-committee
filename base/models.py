@@ -24,7 +24,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     apartment = models.IntegerField(null=True)
     phone_number = models.CharField(max_length=100)
-    profile_pic = models.ImageField(default='profile_pics.png', blank=True)
+    profile_pic = models.ImageField(default='/profile_pics.png', blank=True)
     is_committee = models.BooleanField(default=False)
     monthly_payment = models.BooleanField(default=False)
 
