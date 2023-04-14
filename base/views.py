@@ -500,8 +500,7 @@ class ProductsVoteView(APIView):
         """
         Handle POST requests to create a new Task object
         """
-        serializer = ProductsSerializer(
-            data=request.data, context={'profile_id': request.user})
+        serializer = ProductsSerializer(data=request.data, context={'profile_id': request.user})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
