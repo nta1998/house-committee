@@ -5,7 +5,7 @@ services:
     container_name: django
     build:
       context: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000 --insecure
     volumes:
       - .:/usr/app
     ports:
