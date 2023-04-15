@@ -29,7 +29,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,7 +89,6 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -204,4 +202,3 @@ CRONJOBS = [
     ("* * 1 * *", "base.cron.update_monthly_payment"),
 ]
 
-SECURE_CONTENT_TYPE_NOSNIFF = False
