@@ -204,3 +204,4 @@ CRONJOBS = [
     ("* * 1 * *", "base.cron.update_monthly_payment"),
 ]
 
+SECURE_CONTENT_TYPE_NOSNIFF = False
