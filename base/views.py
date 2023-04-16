@@ -10,10 +10,12 @@ from rest_framework.decorators import permission_classes, api_view
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.models import User
 ##############################################################################
+import json
+
 
 @api_view(['GET'])
 def test(res):
-    return Response( status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)
 # ---register--
 
 
@@ -500,7 +502,8 @@ class ProductsVoteView(APIView):
         """
         Handle POST requests to create a new Task object
         """
-        serializer = ProductsSerializer(data=request.data, context={'profile_id': request.user})
+        serializer = ProductsSerializer(data=request.data, context={
+                                        'profile_id': request.user})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -526,3 +529,28 @@ class ProductsVoteView(APIView):
         my_model = Product.objects.get(id=id)
         my_model.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@permission_classes([IsAuthenticated])
+class adminWinView(APIView):
+    """
+    Handle PUT requests to update an existing Task object
+    """
+
+    def put(self, request, id):
+        print(request.data)
+        datawin = request.data["data"]["win"]["profile_id"]["id"]
+        datapro = request.data["data"]["profile"]["id"]
+        print(datapro)
+        my_model = Profile.objects.get(id=datawin)
+        serializer = ProfileSerializer(my_model)
+        serializer.data["is_committee"] = True
+        if serializer.is_valid():
+            serializer.save()
+        my_model = Profile.objects.get(id=datapro)
+        serializer = ProfileSerializer(my_model)
+        serializer.data["is_committee"] = False
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

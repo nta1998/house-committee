@@ -20,6 +20,7 @@ urlpatterns = [
     path('adsPay/', views.crudPaymentAdtlView.as_view()),
     path('adsPay/<id>', views.crudPaymentAdtlView.as_view()),
     path('vote/', views.crudVoteView.as_view()),
+    path('vote/win/<id>', views.adminWinView.as_view()),
     path('vote/<id>', views.crudVoteView.as_view()),
     path('chat/', views.ChatVoteView.as_view()),
     path('chat/<id>', views.ChatVoteView.as_view()),
