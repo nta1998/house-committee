@@ -536,20 +536,14 @@ class adminWinView(APIView):
     """
     Handle PUT requests to update an existing Task object
     """
-
     def put(self, request, id):
         print(request.data)
         datawin = request.data["data"]["win"]["profile_id"]["id"]
         datapro = request.data["data"]["profile"]["id"]
         print(datapro)
-        my_model = Profile.objects.get(id=datawin)
+        my_model = Profile.objects.get(id=id)
         serializer = ProfileSerializer(my_model)
         serializer.data["is_committee"] = True
-        if serializer.is_valid():
-            serializer.save()
-        my_model = Profile.objects.get(id=datapro)
-        serializer = ProfileSerializer(my_model)
-        serializer.data["is_committee"] = False
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
