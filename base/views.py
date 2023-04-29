@@ -192,7 +192,6 @@ class crudView(APIView):
         parser_class = (MultiPartParser, FormParser)
         my_model = Profile.objects.get(id=id)
         serializer = ProfileSerializer(my_model, data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -538,13 +537,14 @@ class adminWinView(APIView):
     """
     def put(self, request, id):
         print(request.data)
-        datawin = request.data["data"]["win"]["profile_id"]["id"]
-        datapro = request.data["data"]["profile"]["id"]
-        print(datapro)
         my_model = Profile.objects.get(id=id)
-        serializer = ProfileSerializer(my_model)
-        serializer.data["is_committee"] = True
+        serializer = ProfileSerializer(my_model, data=request.data['win'])
         if serializer.is_valid():
             serializer.save()
+            my_model = Profile.objects.get(id=request.data['old']['id'])
+            serializer = ProfileSerializer(my_model, data=request.data['old'])
+            if serializer.is_valid():
+                serializer.save()
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
