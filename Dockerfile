@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile
-
 FROM ubuntu:latest
 # Install cron
 RUN apt-get update && apt-get -y install cron && apt-get -y install pip
